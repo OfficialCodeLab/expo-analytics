@@ -1,10 +1,62 @@
 <div class="main-content">
     <div class="container-fluid">
-      <b>Users:</b> {{total_user_count}}<br />
-      <b>Vendors:</b> {{total_vendor_count}}
+
+      <div class="row">
+        <div class="col-md-3 col-sm-4">
+          <div class="card top-cards">
+            <div class="row">
+              <div class="col-xs-6">
+                <div class="icon-div">
+                  <i class="pe-7s-users"></i>
+                </div>
+              </div>
+              <div class="col-xs-6">
+                <div class="stats-div">
+                  <h3>{{total_user_count}}</h3>
+                  <p>
+                    Total user signups
+                  </p>
+                </div>
+              </div>
+            </div>
+              <div class="bottom-text">
+              <hr />
+                <p>
+                  <i class="pe-7s-look"></i>  {{average_scans}} average scans per user
+                </p>
+              </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-4">
+          <div class="card top-cards">
+            <div class="row">
+              <div class="col-xs-6">
+                <div class="icon-div">
+                  <i class="pe-7s-portfolio"></i>
+                </div>
+              </div>
+              <div class="col-xs-6">
+                <div class="stats-div">
+                  <h3>{{total_vendor_count}}</h3>
+                  <p>
+                    Total vendor accounts
+                  </p>
+                </div>
+              </div>
+            </div>
+              <div class="bottom-text">
+              <hr />
+                <p>
+                  <i class="pe-7s-headphones"></i>  {{average_contacts}} average contacts per vendor
+                </p>
+              </div>
+            </div>
+        </div>
+      </div>
         <div class="row">
             <div class="col-md-4">
-                <lbd-chart
+                <!-- <lbd-chart
                   [title]="'Statistics'"
                   [subtitle]="'Total app users'"
                   [chartClass]="'ct-perfect-fourth'"
@@ -14,7 +66,20 @@
                   [withHr]="true"
                   [footerIconClass]="'fa fa-clock-o'"
                   [footerText]="'1 total expo'">
-                </lbd-chart>
+                </lbd-chart> -->
+                <div class="card">
+                  <div class="chart-box-inner">
+                    <h4>Usage Statistics</h4>
+                    <p>
+                      User activity on App
+                    </p><br />
+                    <chart [type]="type" [data]="chartData" [options]="options"></chart>
+                    <div class="stat-totals">
+                        <b>Scans:</b> {{total_user_scans}}<br />
+                        <b>Favourites:</b> {{total_user_favs}}
+                    </div>
+                  </div>
+                </div>
             </div>
             <div class="col-md-8">
                 <lbd-chart

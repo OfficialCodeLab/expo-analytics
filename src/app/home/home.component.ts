@@ -9,7 +9,7 @@ import {DataService} from "../services/data.service";
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
     public statsChartType: ChartType;
@@ -31,12 +31,49 @@ export class HomeComponent implements OnInit {
 
     local_users: User[];
     local_vendors: Vendor[];
+    type: string;
+    chartData: any;
+    options: any;
 
     total_user_count: number;
     total_vendor_count: number;
     total_user_scans: number;
+    total_user_favs: number;
+    average_scans: number;
+    average_contacts: number;
 
   constructor(public data: DataService) {
+
+        this.type = 'pie';
+        // this.chartData = {
+        //   labels: ["Scans", "Favourites"],
+        //   datasets: [
+        //     {
+        //       label: "Activity Analysis",
+        //       data: [50, 50],
+        //       backgroundColor: [
+        //         'rgba(54, 162, 235, 0.2)',
+        //         'rgba(255, 99, 132, 0.2)'
+        //         // 'rgba(255, 206, 86, 0.2)',
+        //         // 'rgba(75, 192, 192, 0.2)',
+        //         // 'rgba(153, 102, 255, 0.2)',
+        //         // 'rgba(255, 159, 64, 0.2)'
+        //       ],
+        //       borderColor: [
+        //           'rgba(54, 162, 235, 1)',
+        //           'rgba(255,99,132,1)'
+        //           // 'rgba(255, 206, 86, 1)',
+        //           // 'rgba(75, 192, 192, 1)',
+        //           // 'rgba(153, 102, 255, 1)',
+        //           // 'rgba(255, 159, 64, 1)'
+        //       ],
+        //     }
+        //   ]
+        // };
+        this.options = {
+          responsive: true,
+          maintainAspectRatio: false
+        };
     data.getUsers().then(users => {
         this.local_users = users;
         return data.getVendors();
@@ -45,6 +82,7 @@ export class HomeComponent implements OnInit {
         this.total_user_count = this.calculateTotalUsers();
         this.total_vendor_count = this.calculateTotalVendors();
         this.total_user_scans = this.calculateTotalScans();
+        this.total_user_favs = this.calculateTotalFavs();
         this.recalcChartStats();
     }).catch(ex => {
         console.log(ex);
@@ -60,7 +98,9 @@ export class HomeComponent implements OnInit {
         this.local_users = users;
         this.total_user_count = this.calculateTotalUsers();
         this.total_user_scans = this.calculateTotalScans();
+        this.total_user_favs = this.calculateTotalFavs();
     });
+
   }
 
   ngOnInit() {
@@ -73,6 +113,23 @@ export class HomeComponent implements OnInit {
       { title: 'Users', imageClass: 'fa fa-circle text-info' },
       { title: 'Vendors', imageClass: 'fa fa-circle text-danger' },
     ];
+
+    this.data.getUsers().then(users => {
+        this.local_users = users;
+        return this.data.getVendors();
+    }).then(vendors => {
+        this.local_vendors = vendors;
+        this.total_user_count = this.calculateTotalUsers();
+        this.total_vendor_count = this.calculateTotalVendors();
+        this.total_user_scans = this.calculateTotalScans();
+
+        this.statsChartData = {
+          labels: [this.total_user_count + "", this.total_user_count + ""],
+          series: [50, 50]
+        };
+    }).catch(ex => {
+        console.log(ex);
+    });
 
       this.hoursChartType = ChartType.Line;
       this.hoursChartData = {
@@ -174,18 +231,55 @@ export class HomeComponent implements OnInit {
           count += scans.length;
         }
 
+        this.average_scans = Math.round(count / this.local_users.length);
+        this.average_contacts = Math.round(count / this.local_vendors.length);
         return count;
     }
 
+    calculateTotalFavs(): number {
+        let count = 0;
+
+        for (let user of this.local_users) {
+          let favs = user.Favourites;
+
+          count += favs.length;
+        }
+
+        return count;
+    }
+
+
     recalcChartStats() {
-      this.statsChartData.series.pop();
-      this.statsChartData.series.pop();
-      this.statsChartData.series.push(this.total_user_count);
-      this.statsChartData.series.push(this.total_vendor_count);
-      this.statsChartData.labels.pop();
-      this.statsChartData.labels.pop();
-      this.statsChartData.labels.push(this.total_user_count);
-      this.statsChartData.labels.push(this.total_vendor_count);
+      // this.chartData.datasets[0].data.pop();
+      this.chartData = {
+        labels: ["Scans", "Favourites"],
+        datasets: [
+          {
+            label: "Activity Analysis",
+            data: [this.total_user_scans, this.total_user_favs],
+            backgroundColor: [
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(255, 99, 132, 0.2)'
+            ],
+            borderColor: [
+                'rgba(54, 162, 235, 1)',
+                'rgba(255,99,132,1)'
+            ],
+          }
+        ]
+      };
+      // this.chartData.datasets[0].data = [this.total_user_scans, this.total_user_favs];
+      // this.chartData.datasets[0].data.push(this.total_user_scans);
+      // this.chartData.datasets[0].data.push(this.total_user_favs);
+      // this.chartData.datasets[0].data.push();
+      // this.statsChartData.series.pop();
+      // this.statsChartData.series.pop();
+      // this.statsChartData.series.push(this.total_user_count);
+      // this.statsChartData.series.push(this.total_vendor_count);
+      // this.statsChartData.labels.pop();
+      // this.statsChartData.labels.pop();
+      // this.statsChartData.labels.push(this.total_user_count);
+      // this.statsChartData.labels.push(this.total_vendor_count);
     }
 
 }

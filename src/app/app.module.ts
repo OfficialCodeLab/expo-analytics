@@ -20,6 +20,7 @@ import { IconsComponent } from './icons/icons.component';
 import { MapsComponent } from './maps/maps.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import {DataService} from "./services/data.service";
+import { ChartModule } from 'angular2-chartjs';
 // import { UpgradeComponent } from './upgrade/upgrade.component';
 
 @NgModule({
@@ -43,7 +44,8 @@ import {DataService} from "./services/data.service";
     SidebarModule,
     RouterModule,
     AppRoutingModule,
-    LbdModule
+    LbdModule,
+    ChartModule
   ],
   providers: [DataService],
   bootstrap: [AppComponent]
