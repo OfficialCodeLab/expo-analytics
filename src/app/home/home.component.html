@@ -1,4 +1,4 @@
-<div class="main-content" *ngIf="!loaded">
+<div class="main-content">
     <div class="container-fluid">
 
       <div class="row">
@@ -126,9 +126,7 @@
                 [labels]="lineChartLabels"
                 [colors]="lineChartColors"
                 [legend]="lineChartLegend"
-                [chartType]="lineChartType"
-                (chartHover)="chartHovered($event)"
-                (chartClick)="chartClicked($event)"></canvas>
+                [chartType]="lineChartType"></canvas>
               </div>
             </div>
                 <!-- <lbd-chart
