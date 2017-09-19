@@ -6,6 +6,8 @@ import {RequestOptions, Request, RequestMethod} from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
+declare var $:any;
+
 @Injectable()
 export class DataService {
     all_users: User[];
@@ -25,16 +27,61 @@ export class DataService {
         this.all_users = [];
         this.all_vendors = [];
         this.initial_load = true;
+        this.notifyStart();
 
         this.setupDatabase().then(success => {
+            this.notifySuccess();
             console.log("Refreshed database!");
             this.initial_load = false;
             this.loadEvent.emit(this.initial_load);
         }).catch(ex => {
+            this.notifyFail();
             console.log("Unable to get database!", ex);
             this.initial_load = false;
             this.loadEvent.emit(this.initial_load);
         });
+    }
+
+    notifyStart() {
+      $.notify({
+          icon: "pe-7s-clock",
+          message: "Data is being fetched from the server"
+      },{
+          type: "info",
+          timer: 1000,
+          placement: {
+              from: "bottom",
+              align: "right"
+          }
+      });
+    }
+
+    notifySuccess() {
+      $.notify({
+          icon: "pe-7s-refresh-2",
+          message: "Data has been fetched successfully"
+      },{
+          type: "success",
+          timer: 1000,
+          placement: {
+              from: "bottom",
+              align: "right"
+          }
+      });
+    }
+
+    notifyFail() {
+      $.notify({
+          icon: "pe-7s-attention",
+          message: "Data could not be fetched, please try refresh"
+      },{
+          type: "danger",
+          timer: 1000,
+          placement: {
+              from: "bottom",
+              align: "right"
+          }
+      });
     }
 
     getUsers(): Promise<User[]> {

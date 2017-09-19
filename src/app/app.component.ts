@@ -23,4 +23,7 @@ export class AppComponent implements OnInit {
         return true;
       }
     }
+    test() {
+      console.log("TEST");
+    }
 }

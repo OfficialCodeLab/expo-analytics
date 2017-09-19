@@ -4,11 +4,22 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="header">
-                        <h4 class="title">Striped Table with Hover</h4>
-                        <p class="category">Here is a subtitle for this table</p>
+                      <div class="row">
+                        <div class="col-sm-8">
+                          <h4 class="title">Vendor Table</h4>
+                          <p class="category">All vendors that have used the expo app</p>
+                        </div>
+                        <div class="col-sm-4">
+
+                          <div class="form-group pull-right">
+                              <label>Search</label>
+                              <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="search_terms">
+                          </div>
+                        </div>
+                      </div>
                     </div>
                     <div class="content table-responsive table-full-width">
-                          <table class="table table-hover table-striped">
+                          <!-- <table class="table table-hover">
                                 <thead>
                                     <tr>
                                         <th *ngFor="let cell of tableData1.headerRow">{{ cell }}</th>
@@ -19,12 +30,66 @@
                                         <td *ngFor="let cell of row">{{cell}}</td>
                                     </tr>
                                 </tbody>
+                          </table> -->
+                          <table *ngIf="local_vendors" class="table table-hover" [mfData]="local_vendors | vendorSearch: search_terms" #mf="mfDataTable" >
+                              <thead>
+                              <tr>
+                                  <th>
+                                      <mfDefaultSorter by="name_english">[Vendor Name]</mfDefaultSorter>
+                                  </th>
+                                  <th>
+                                      <mfDefaultSorter by="total_scans">[Scans]</mfDefaultSorter>
+                                  </th>
+                                  <th>
+                                      <mfDefaultSorter by="total_favourites">[Favourites]</mfDefaultSorter>
+                                  </th>
+                                  <th>
+                                      <mfDefaultSorter by="id">[ID]</mfDefaultSorter>
+                                  </th>
+                                  <th>
+                                      <mfDefaultSorter by="stand_number">[Stand Number]</mfDefaultSorter>
+                                  </th>
+                                  <th>
+                                      <mfDefaultSorter by="category">[Category]</mfDefaultSorter>
+                                  </th>
+                              </tr>
+                              </thead>
+                              <tbody>
+                              <tr *ngFor="let vendor of mf.data">
+                                  <td>
+                                      {{vendor.name_english}}
+                                  </td>
+                                  <td>
+                                      {{vendor.total_scans}}
+                                  </td>
+                                  <td>
+                                      {{vendor.total_favourites}}
+                                  </td>
+                                  <td>
+                                      {{vendor.id}}
+                                  </td>
+                                  <td>
+                                      {{vendor.stand_number}}
+                                  </td>
+                                  <td>
+                                      {{vendor.category}}
+                                  </td>
+                              </tr>
+                              </tbody>
+                              <!--<tfoot>-->
+                              <!--<tr>-->
+                                  <!--<td colspan="4">-->
+                                      <!--<mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>-->
+                                  <!--</td>-->
+                              <!--</tr>-->
+                              <!--</tfoot>-->
                           </table>
-
                     </div>
                 </div>
             </div>
-            <div class="col-md-12">
+
+
+            <!-- <div class="col-md-12">
                 <div class="card card-plain">
                     <div class="header">
                         <h4 class="title">Table on Plain Background</h4>
@@ -45,7 +110,7 @@
                         </table>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>

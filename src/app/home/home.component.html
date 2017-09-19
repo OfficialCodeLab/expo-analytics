@@ -1,4 +1,4 @@
-<div class="main-content">
+<div class="main-content" *ngIf="!loaded">
     <div class="container-fluid">
 
       <div class="row">
@@ -38,7 +38,7 @@
               </div>
               <div class="col-xs-6">
                 <div class="stats-div">
-                  <h3>{{total_vendor_count}}</h3>
+                  <h3>{{total_vendor_count}} / {{total_vendor_count + 3}}</h3>
                   <p>
                     Total vendor accounts
                   </p>
@@ -53,6 +53,33 @@
               </div>
             </div>
         </div>
+
+        <div class="col-md-3 col-sm-4">
+          <div class="card top-cards">
+            <div class="row">
+              <div class="col-xs-6">
+                <div class="icon-div">
+                  <i class="pe-7s-id"></i>
+                </div>
+              </div>
+              <div class="col-xs-6">
+                <div class="stats-div">
+                  <h3>{{total_user_scans}}</h3>
+                  <p>
+                    Total Scans
+                  </p>
+                </div>
+              </div>
+            </div>
+              <div class="bottom-text">
+              <hr />
+                <p>
+                  <i class="pe-7s-graph2"></i>  14% above average
+                </p>
+              </div>
+            </div>
+        </div>
+
       </div>
         <div class="row">
             <div class="col-md-4">
@@ -68,12 +95,18 @@
                   [footerText]="'1 total expo'">
                 </lbd-chart> -->
                 <div class="card">
-                  <div class="chart-box-inner">
+                  <div class="chart-box-inner" style='padding-bottom:  60px;'>
                     <h4>Usage Statistics</h4>
                     <p>
                       User activity on App
-                    </p><br />
-                    <chart [type]="type" [data]="chartData" [options]="options"></chart>
+                    </p><br /><br /><br />
+                    <canvas baseChart
+                       [data]="chartData"
+                       [labels]="chartLabels"
+                       [chartType]="type"
+                       [options]="chartOptions">
+                     </canvas>
+                    <!-- <chart [type]="type" [data]="chartData" [options]="options"></chart> -->
                     <div class="stat-totals">
                         <b>Scans:</b> {{total_user_scans}}<br />
                         <b>Favourites:</b> {{total_user_favs}}
@@ -82,7 +115,23 @@
                 </div>
             </div>
             <div class="col-md-8">
-                <lbd-chart
+              <div class="card">
+                <div class="chart-box-inner">
+                  <h4>Activity Statistics</h4>
+                  <p>
+                    Amount of events by user
+                  </p>
+              <canvas baseChart style="width: auto; height: 400px;"
+                [datasets]="lineChartData"
+                [labels]="lineChartLabels"
+                [colors]="lineChartColors"
+                [legend]="lineChartLegend"
+                [chartType]="lineChartType"
+                (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)"></canvas>
+              </div>
+            </div>
+                <!-- <lbd-chart
                   [title]="'Users Behavior'"
                   [subtitle]="'24 Hours performance'"
                   [chartType]="hoursChartType"
@@ -93,23 +142,27 @@
                   [withHr]="true"
                   [footerIconClass]="'fa fa-history'"
                   [footerText]="'Updated 3 minutes ago'">
-                </lbd-chart>
+                </lbd-chart> -->
             </div>
         </div>
+
         <div class="row">
-            <div class="col-md-6">
-                <lbd-chart
-                  [title]="'2014 Sales'"
-                  [subtitle]="'All products including Taxes'"
-                  [chartType]="activityChartType"
-                  [chartData]="activityChartData"
-                  [chartOptions]="activityChartOptions"
-                  [chartResponsive]="activityChartResponsive"
-                  [legendItems]="activityChartLegendItems"
-                  [withHr]="true"
-                  [footerIconClass]="'fa fa-check'"
-                  [footerText]="'Data information certified'">
-                </lbd-chart>
+          <div class="col-md-6">
+            <div class="card">
+              <div class="chart-box-inner">
+                <h4>Signup Activity</h4>
+                <p>
+                  Amount of signups by type
+                </p>
+                <canvas baseChart
+                   [datasets]="barChartData"
+                   [labels]="barChartLabels"
+                   [colors]="barChartColors"
+                   [options]="barChartOptions"
+                   [legend]="barChartLegend"
+                   [chartType]="barChartType"></canvas>
+                 </div>
+               </div>
             </div>
             <div class="col-md-6">
                 <div class="card">

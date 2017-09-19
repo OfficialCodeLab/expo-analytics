@@ -8,7 +8,7 @@ import { AppRoutingModule } from './app.routing';
 import { NavbarModule } from './shared/navbar/navbar.module';
 import { FooterModule } from './shared/footer/footer.module';
 import { SidebarModule } from './sidebar/sidebar.module';
-import { LbdModule } from './lbd/lbd.module';
+// import { LbdModule } from './lbd/lbd.module';
 
 import { AppComponent } from './app.component';
 
@@ -20,7 +20,9 @@ import { IconsComponent } from './icons/icons.component';
 import { MapsComponent } from './maps/maps.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import {DataService} from "./services/data.service";
-import { ChartModule } from 'angular2-chartjs';
+import { ChartsModule } from 'ng2-charts';
+import {DataTableModule} from "angular2-datatable";
+import { VendorSearchPipe } from './pipes/vendor-search.pipe';
 // import { UpgradeComponent } from './upgrade/upgrade.component';
 
 @NgModule({
@@ -32,6 +34,7 @@ import { ChartModule } from 'angular2-chartjs';
     TypographyComponent,
     IconsComponent,
     MapsComponent,
+    VendorSearchPipe,
     NotificationsComponent
 
   ],
@@ -44,8 +47,8 @@ import { ChartModule } from 'angular2-chartjs';
     SidebarModule,
     RouterModule,
     AppRoutingModule,
-    LbdModule,
-    ChartModule
+    DataTableModule,
+    ChartsModule
   ],
   providers: [DataService],
   bootstrap: [AppComponent]

@@ -2,6 +2,12 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import { ROUTES } from '../../sidebar/sidebar.component';
 import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
 
+import {User} from "../../classes/user";
+import {Vendor} from "../../classes/vendor";
+import {DataService} from "../../services/data.service";
+
+declare var $:any;
+
 @Component({
     // moduleId: module.id,
     selector: 'navbar-cmp',
@@ -14,10 +20,70 @@ export class NavbarComponent implements OnInit{
     private toggleButton: any;
     private sidebarVisible: boolean;
 
-    constructor(location: Location,  private element: ElementRef) {
+    loading: boolean;
+
+
+
+    constructor(location: Location,  private element: ElementRef, public data: DataService) {
       this.location = location;
           this.sidebarVisible = false;
     }
+
+    refresh_all_data(): void {
+        this.loading = true;
+        this.notifyStart();
+        this.data.refreshDatabase().then(success => {
+            this.loading = false;
+            this.notifySuccess();
+        }).catch(ex => {
+            this.loading = false;
+            this.notifyFail();
+        });
+    }
+
+    notifyStart() {
+      $.notify({
+          icon: "pe-7s-clock",
+          message: "Data is being fetched from the server"
+      },{
+          type: "info",
+          timer: 1000,
+          placement: {
+              from: "bottom",
+              align: "right"
+          }
+      });
+    }
+
+    notifySuccess() {
+      $.notify({
+          icon: "pe-7s-refresh-2",
+          message: "Data has been refreshed successfully"
+      },{
+          type: "success",
+          timer: 1000,
+          placement: {
+              from: "bottom",
+              align: "right"
+          }
+      });
+    }
+
+    notifyFail() {
+      $.notify({
+          icon: "pe-7s-attention",
+          message: "Data could not refresh, please try again"
+      },{
+          type: "danger",
+          timer: 1000,
+          placement: {
+              from: "bottom",
+              align: "right"
+          }
+      });
+    }
+
+
 
     ngOnInit(){
       this.listTitles = ROUTES.filter(listTitle => listTitle);
