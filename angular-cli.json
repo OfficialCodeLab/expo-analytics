@@ -1,7 +1,7 @@
 {
   "project": {
     "version": "1.4.0",
-    "name": "lbd-free-angular-cli"
+    "name": "expo-analytics"
   },
   "apps": [
     {
