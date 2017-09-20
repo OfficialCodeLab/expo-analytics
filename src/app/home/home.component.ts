@@ -149,22 +149,23 @@ export class HomeComponent implements OnInit {
         this.total_user_scans = this.calculateTotalScans();
         this.total_user_favs = this.calculateTotalFavs();
         this.recalcChartStats();
+        data.vendors_event.subscribe(vendors => {
+            this.local_vendors = vendors;
+            this.total_vendor_count = this.calculateTotalVendors();
+            this.recalcChartStats();
+        });
+
+        data.users_event.subscribe(users => {
+            this.local_users = users;
+            this.total_user_count = this.calculateTotalUsers();
+            this.total_user_scans = this.calculateTotalScans();
+            this.total_user_favs = this.calculateTotalFavs();
+        });
     }).catch(ex => {
         console.log(ex);
     });
 
-    data.vendors_event.subscribe(vendors => {
-        this.local_vendors = vendors;
-        this.total_vendor_count = this.calculateTotalVendors();
-        this.recalcChartStats();
-    });
 
-    data.users_event.subscribe(users => {
-        this.local_users = users;
-        this.total_user_count = this.calculateTotalUsers();
-        this.total_user_scans = this.calculateTotalScans();
-        this.total_user_favs = this.calculateTotalFavs();
-    });
 
   }
 

@@ -443,13 +443,13 @@ input:focus {
     background-size: 150% 150%; }
   .sidebar[data-color="red"]:after,
   .bootstrap-navbar[data-color="red"]:after {
-    background: #FB404B;
-    background: -moz-linear-gradient(top, #FB404B 0%, #bb0502 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #FB404B), color-stop(100%, #bb0502));
-    background: -webkit-linear-gradient(top, #FB404B 0%, #bb0502 100%);
-    background: -o-linear-gradient(top, #FB404B 0%, #bb0502 100%);
-    background: -ms-linear-gradient(top, #FB404B 0%, #bb0502 100%);
-    background: linear-gradient(to bottom, #FB404B 0%, #bb0502 100%);
+    background: #241637;
+    background: -moz-linear-gradient(top, #241637 0%, #302050 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #241637), color-stop(100%, #302050));
+    background: -webkit-linear-gradient(top, #241637 0%, #302050 100%);
+    background: -o-linear-gradient(top, #241637 0%, #302050 100%);
+    background: -ms-linear-gradient(top, #241637 0%, #302050 100%);
+    background: linear-gradient(to bottom, #241637 0%, #302050 100%);
     background-size: 150% 150%; }
   .sidebar[data-color="purple"]:after,
   .bootstrap-navbar[data-color="purple"]:after {

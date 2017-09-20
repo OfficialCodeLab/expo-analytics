@@ -1,9 +1,9 @@
 
 <div class="sidebar-wrapper">
     <div class="logo">
-        <a href="http://www.creative-tim.com" class="simple-text">
+        <a class="simple-text">
             <div class="logo-img">
-                <img src="/assets/img/angular2-logo-white.png"/>
+                <img src="/assets/img/sp-logo.png"/>
             </div>
             ScanPlan
         </a>
@@ -34,9 +34,9 @@
               </ul>
         </li>
         <li *ngIf="isMobileMenu()">
-           <a>
+           <a (click)="refresh_all_data()">
                 <i class="fa fa-search"></i>
-				<p class="hidden-lg hidden-md">Search</p>
+				<p class="hidden-lg hidden-md">Refresh</p>
             </a>
         </li>
         <li *ngIf="isMobileMenu()">

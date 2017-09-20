@@ -2,7 +2,7 @@
     <div class="container-fluid">
 
       <div class="row">
-        <div class="col-md-3 col-sm-4">
+        <div class="col-lg-3 col-md-6">
           <div class="card top-cards">
             <div class="row">
               <div class="col-xs-6">
@@ -28,7 +28,7 @@
             </div>
         </div>
 
-        <div class="col-md-3 col-sm-4">
+        <div class="col-lg-3 col-md-6">
           <div class="card top-cards">
             <div class="row">
               <div class="col-xs-6">
@@ -38,7 +38,7 @@
               </div>
               <div class="col-xs-6">
                 <div class="stats-div">
-                  <h3>{{total_vendor_count}} / {{total_vendor_count + 3}}</h3>
+                  <h3 *ngIf="total_vendor_count">{{total_vendor_count}} / {{total_vendor_count + 3}}</h3>
                   <p>
                     Total vendor accounts
                   </p>
@@ -54,7 +54,8 @@
             </div>
         </div>
 
-        <div class="col-md-3 col-sm-4">
+
+        <div class="col-lg-3 col-md-6">
           <div class="card top-cards">
             <div class="row">
               <div class="col-xs-6">
@@ -77,6 +78,26 @@
                   <i class="pe-7s-graph2"></i>  14% above average
                 </p>
               </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <div class="card top-cards" style="min-height: 175px;">
+            <div class="row">
+              <div class="col-xs-6">
+                <div class="icon-div" style="padding: 30px 5px;">
+                  <img src="/assets/img/sp-lg.png" style="width: 100%; height: auto; max-width: 95px;"/>
+                </div>
+              </div>
+              <div class="col-xs-6">
+                <div class="stats-div">
+                  <h3 style="padding-top: 25px; padding-right: 15px;"><img src="assets/img/sp-txt.png" style="width: 100%; height: auto;" /></h3>
+                  <p style="padding-left: 5px; padding-top: 10px;">
+                    Experience greatness
+                  </p>
+                </div>
+              </div>
+            </div>
             </div>
         </div>
 
