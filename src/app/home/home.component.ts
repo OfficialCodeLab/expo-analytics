@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
     local_users: User[];
     local_vendors: Vendor[];
     public chartLabels:string[] = ['Scans', 'Favourties'];
-    public chartData:number[] = [500, 500];
+    public chartData:number[] = [6605, 5881];
     public type:string = 'pie';
     public chartOptions:any = {
     responsive: true
@@ -97,12 +97,12 @@ export class HomeComponent implements OnInit {
       }
     ];
 
-    total_user_count: number;
-    total_vendor_count: number;
-    total_user_scans: number;
-    total_user_favs: number;
-    average_scans: number;
-    average_contacts: number;
+    total_user_count: number = 699;
+    total_vendor_count: number = 142;
+    total_user_scans: number = 6605;
+    total_user_favs: number = 5881;
+    average_scans: number = 9;
+    average_contacts: number = 47;
 
   constructor(public data: DataService) {
 
