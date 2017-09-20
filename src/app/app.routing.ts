@@ -14,13 +14,11 @@ import { NotificationsComponent } from './notifications/notifications.component'
 
 const routes: Routes =[
     { path: 'dashboard',      component: HomeComponent },
-    { path: 'user',           component: UserComponent },
-    { path: 'table',          component: TablesComponent },
-    { path: 'typography',     component: TypographyComponent },
-    { path: 'icons',          component: IconsComponent },
-    { path: 'maps',           component: MapsComponent },
-    { path: 'notifications',  component: NotificationsComponent },
-      { path: '',          redirectTo: 'dashboard', pathMatch: 'full' }
+    { path: 'settings',           component: UserComponent },
+    { path: 'vendors',          component: TablesComponent },
+    { path: 'users',     component: TypographyComponent },
+    { path: 'expo-layout',           component: MapsComponent },
+    { path: '',          redirectTo: 'dashboard', pathMatch: 'full' }
 ];
 
 @NgModule({
